@@ -26,6 +26,7 @@ public:
     void init();
     void startAdvertising();
     void stopAdvertising();
+    void checkConnection();
    
 };
 

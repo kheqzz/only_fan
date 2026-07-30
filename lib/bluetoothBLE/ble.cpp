@@ -1,6 +1,6 @@
 #include "ble.h"
 #include "bleCallbacks.h"
-#include "config.h"
+#include "../config.h"
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <Arduino.h>
@@ -27,7 +27,7 @@ void BLEManager::init()
 {
     // Initialize BLE
     Serial.println("Initializing BLE...");
-    BLEDevice::init("FanController");
+    BLEDevice::init(BLUETOOTH_DEVICE_NAME);
     Serial.println("BLE initialized. /n Creating BLE server...");
     bleData.pServer = BLEDevice::createServer();
     Serial.println("BLE server created. /n Setting up callbacks...");
@@ -37,6 +37,15 @@ void BLEManager::init()
 
 }
 
+void BLEManager::checkConnection()
+{
+    // Check if a device is connected
+    if (bleData.deviceConnected) {
+        Serial.println("Device is connected.");
+    } else {
+        Serial.println("No device connected.");
+    }
+}
 void BLEManager::startAdvertising()
 {
     // Start BLE advertising
